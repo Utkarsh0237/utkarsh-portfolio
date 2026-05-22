@@ -8,9 +8,9 @@ import Link from "next/link";
 import { PORTFOLIO_CONTENT } from "@/content/portfolio";
 
 const floatingBadges = [
-  { name: "Node.js", color: "text-green-500", border: "border-green-500/20", bg: "bg-green-500/10", top: "10%", left: "5%" },
-  { name: "AWS", color: "text-orange-500", border: "border-orange-500/20", bg: "bg-orange-500/10", top: "25%", left: "80%" },
-  { name: "PostgreSQL", color: "text-blue-500", border: "border-blue-500/20", bg: "bg-blue-500/10", top: "70%", left: "10%" },
+  { name: "Node.js", color: "text-green-500", border: "border-green-500/20", bg: "bg-green-500/10", top: "20%", left: "60%" },
+  { name: "AWS", color: "text-orange-500", border: "border-orange-500/20", bg: "bg-orange-500/10", top: "23%", left: "85%" },
+  { name: "PostgreSQL", color: "text-blue-500", border: "border-blue-500/20", bg: "bg-blue-500/10", top: "70%", left: "45%" },
   { name: "Redis", color: "text-red-500", border: "border-red-500/20", bg: "bg-red-500/10", top: "85%", left: "75%" },
   { name: "TypeScript", color: "text-blue-400", border: "border-blue-400/20", bg: "bg-blue-400/10", top: "50%", left: "90%" },
 ];
