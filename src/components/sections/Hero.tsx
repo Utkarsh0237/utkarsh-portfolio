@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 import { FileText, ArrowRight, Server, Database, Cloud, Activity, Zap } from "lucide-react";
 import { Linkedin } from "@/components/ui/Icons";
 import Link from "next/link";
-
-const RESUME_URL = "https://drive.google.com/file/d/1mYDkiaOrArDIAMZV0X-43X-yaH88hbRt/view?usp=sharing";
-const LINKEDIN_URL = "https://www.linkedin.com/in/utkarsh-pandey-51816a1ba";
+import { PORTFOLIO_CONTENT } from "@/content/portfolio";
 
 const floatingBadges = [
   { name: "Node.js", color: "text-green-500", border: "border-green-500/20", bg: "bg-green-500/10", top: "10%", left: "5%" },
@@ -20,6 +18,7 @@ const floatingBadges = [
 export function Hero() {
   const [typedText, setTypedText] = useState("");
   const fullText = "Building backend systems, one service at a time...";
+  const content = PORTFOLIO_CONTENT.hero;
 
   useEffect(() => {
     let currentText = "";
@@ -41,16 +40,29 @@ export function Hero() {
     return () => clearTimeout(timeout);
   }, []);
 
+  // Map icons for metrics
+  const getMetricIcon = (index: number) => {
+    switch (index) {
+      case 0:
+        return <Zap className="w-4 h-4 text-primary" />;
+      case 1:
+        return <Activity className="w-4 h-4 text-blue-400" />;
+      case 2:
+        return <Database className="w-4 h-4 text-emerald-400" />;
+      default:
+        return <Server className="w-4 h-4 text-zinc-400" />;
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-24 overflow-hidden">
-
       {/* Floating Badges */}
       {floatingBadges.map((badge, i) => (
         <motion.div
           key={badge.name}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
+          transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
           className="absolute hidden xl:flex z-0"
           style={{ top: badge.top, left: badge.left }}
         >
@@ -76,14 +88,16 @@ export function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            Open to new opportunities
+            {content.tagline}
           </div>
 
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-emerald-500/20 blur-2xl opacity-40 -z-10 rounded-full" />
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
-              Backend <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">Software Engineer</span>
+              {content.title} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">
+                {content.titleGradient}
+              </span>
             </h1>
           </div>
 
@@ -97,47 +111,38 @@ export function Hero() {
             />
           </div>
 
-          <h2 className="text-2xl font-semibold text-foreground/90">Hi, I&apos;m Utkarsh Pandey.</h2>
+          <h2 className="text-2xl font-semibold text-foreground/90">Hi, I&apos;m {content.name}.</h2>
 
-          <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Backend engineer with 3+ years of professional experience. I work with Node.js, NestJS, TypeScript, AWS, Redis, PostgreSQL, MongoDB, and Elasticsearch to build reliable APIs and backend services.
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+            {content.intro}
           </p>
 
           {/* Achievement Metrics */}
-          <div className="grid grid-cols-3 gap-3 my-2">
-            <div className="glass p-3 rounded-lg border border-border/50 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-primary text-sm font-semibold">
-                <Zap className="w-4 h-4" /> ~40%
+          <div className="grid grid-cols-3 gap-3 my-2 max-w-xl">
+            {content.metrics.map((metric, idx) => (
+              <div key={metric.label} className="glass p-3 rounded-lg border border-border/50 flex flex-col gap-1">
+                <div className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                  {getMetricIcon(idx)}
+                  <span>{metric.value}</span>
+                </div>
+                <p className="text-[10px] sm:text-xs text-muted-foreground leading-tight">{metric.label}</p>
               </div>
-              <p className="text-xs text-muted-foreground">API improvement</p>
-            </div>
-            <div className="glass p-3 rounded-lg border border-border/50 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-blue-400 text-sm font-semibold">
-                <Activity className="w-4 h-4" /> ~30%
-              </div>
-              <p className="text-xs text-muted-foreground">Effort reduction</p>
-            </div>
-            <div className="glass p-3 rounded-lg border border-border/50 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-emerald-400 text-sm font-semibold">
-                <Database className="w-4 h-4" /> ~25%
-              </div>
-              <p className="text-xs text-muted-foreground">Faster retrieval</p>
-            </div>
+            ))}
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mt-2">
             <Link
               href="#projects"
-              className="px-6 py-3 rounded-md bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all"
+              className="px-6 py-3 rounded-md bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/95 transition-all"
             >
               View Projects
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href={RESUME_URL}
+              href={content.resumeUrl}
               target="_blank"
               rel="noreferrer"
-              className="px-6 py-3 rounded-md glass font-semibold flex items-center gap-2 hover:bg-white/10 transition-all"
+              className="px-6 py-3 rounded-md glass font-semibold flex items-center gap-2 hover:bg-white/5 transition-all border border-border"
             >
               <FileText className="w-4 h-4" />
               View Resume
@@ -151,12 +156,19 @@ export function Hero() {
           </div>
 
           <div className="flex items-center gap-5 mt-2">
-            <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors hover:-translate-y-1 transform duration-200">
+            <a
+              href={content.linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="text-muted-foreground hover:text-blue-400 transition-colors hover:-translate-y-0.5 transform duration-200"
+              aria-label="LinkedIn Profile"
+            >
               <Linkedin className="w-6 h-6" />
             </a>
           </div>
         </motion.div>
 
+        {/* Traffic Simulator */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -191,7 +203,7 @@ export function Hero() {
               </div>
 
               <motion.div
-                whileHover={{ scale: 1.04 }}
+                whileHover={{ scale: 1.02 }}
                 className="absolute top-[140px] left-1/2 -translate-x-1/2 bg-primary/10 border border-primary/30 p-4 rounded-xl flex flex-col items-center gap-2"
               >
                 <Server className="w-6 h-6 text-primary" />

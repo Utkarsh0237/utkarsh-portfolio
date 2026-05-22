@@ -4,12 +4,12 @@ import { LoadingScreen } from "@/components/layout/LoadingScreen";
 import { BackgroundEffects } from "@/components/ui/BackgroundEffects";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { TechnicalHighlights } from "@/components/sections/TechnicalHighlights";
 import { Skills } from "@/components/sections/Skills";
-import { SystemPhilosophy } from "@/components/sections/SystemPhilosophy";
 import { Experience } from "@/components/sections/Experience";
 import { EngineeringStats } from "@/components/sections/EngineeringStats";
 import { Projects } from "@/components/sections/Projects";
-import { Challenges } from "@/components/sections/Challenges";
+import { EngineeringMindset } from "@/components/sections/EngineeringMindset";
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
 
@@ -24,12 +24,12 @@ export default function Home() {
       <main className="flex flex-col w-full">
         <Hero />
         <About />
-        <SystemPhilosophy />
+        <TechnicalHighlights />
         <Skills />
         <Experience />
         <EngineeringStats />
         <Projects />
-        <Challenges />
+        <EngineeringMindset />
         <Certifications />
         <Contact />
       </main>

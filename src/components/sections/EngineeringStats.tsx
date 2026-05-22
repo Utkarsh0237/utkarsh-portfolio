@@ -17,7 +17,7 @@ const stats = [
     icon: <Terminal className="w-5 h-5" />,
     iconBg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
     label: "APIs",
-    value: "40+",
+    value: "100+",
     unit: "",
     description: "REST endpoints built across projects",
   },

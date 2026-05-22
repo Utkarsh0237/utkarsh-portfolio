@@ -3,28 +3,31 @@
 import { motion } from "framer-motion";
 import { Server, Database, Cloud, Zap } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PORTFOLIO_CONTENT } from "@/content/portfolio";
 
 export function About() {
+  const content = PORTFOLIO_CONTENT.about;
+
   const highlights = [
     {
       icon: <Server className="w-6 h-6 text-emerald-400" />,
-      title: "Backend Development",
-      description: "Building RESTful APIs and backend services with Node.js and NestJS."
+      title: "Backend APIs",
+      description: "Developing robust API architectures using Node.js, NestJS, and TypeScript."
     },
     {
       icon: <Database className="w-6 h-6 text-blue-400" />,
-      title: "Databases",
-      description: "Working with PostgreSQL, MongoDB, and Redis for storage and caching needs."
+      title: "Data Systems",
+      description: "Schema design and optimization with PostgreSQL, MongoDB, and Redis."
     },
     {
       icon: <Cloud className="w-6 h-6 text-orange-400" />,
-      title: "Cloud Services",
-      description: "Using AWS services like Lambda, SQS, and S3 in production environments."
+      title: "Cloud Infrastructure",
+      description: "Deploying and managing microservices and async worker queues on AWS."
     },
     {
       icon: <Zap className="w-6 h-6 text-yellow-400" />,
-      title: "Performance",
-      description: "Focused on writing clean, efficient code and optimizing slow queries."
+      title: "System Performance",
+      description: "Reducing API latency through index tuning, query caching, and async jobs."
     }
   ];
 
@@ -32,8 +35,8 @@ export function About() {
     <section id="about" className="py-24 relative">
       <div className="container mx-auto px-4 md:px-8">
         <SectionHeading
-          title="About Me"
-          subtitle="I enjoy working on backend problems and learning how systems scale."
+          title={content.title}
+          subtitle={content.subtitle}
         />
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -42,16 +45,10 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-lg text-muted-foreground space-y-4"
+            className="text-base md:text-lg text-muted-foreground space-y-6 leading-relaxed max-w-xl"
           >
             <p>
-              I&apos;m a backend software engineer with 3+ years of professional experience building APIs and backend services.
-            </p>
-            <p>
-              I&apos;ve mostly worked with Node.js, NestJS, TypeScript, and various databases. I&apos;ve also had the chance to use AWS services and explore system design concepts like event-driven architecture and microservices.
-            </p>
-            <p>
-              I&apos;m someone who takes code quality seriously, learns from my mistakes, and genuinely enjoys solving backend problems — whether that&apos;s a slow query, a tricky auth flow, or figuring out how services should communicate.
+              {content.bio}
             </p>
           </motion.div>
 
@@ -65,11 +62,11 @@ export function About() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="glass p-6 rounded-xl border border-border hover:border-primary/40 transition-colors group"
               >
-                <div className="w-12 h-12 rounded-lg bg-background/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-lg bg-background/50 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                   {highlight.icon}
                 </div>
                 <h3 className="font-semibold text-lg text-foreground mb-2">{highlight.title}</h3>
-                <p className="text-sm text-muted-foreground">{highlight.description}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{highlight.description}</p>
               </motion.div>
             ))}
           </div>

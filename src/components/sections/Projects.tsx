@@ -2,69 +2,43 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Database, Server, Layout, ChevronDown, Activity, Globe } from "lucide-react";
+import { ChevronDown, Database, Globe, Activity, Cpu, AlertCircle, CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
-const projects = [
-  {
-    title: "GoSadi",
-    subtitle: "Multi-Tenant E-Commerce Backend",
-    description: "Worked on the backend for a multi-tenant ecommerce platform. The system handled product management, orders, and search across multiple tenants using NestJS, PostgreSQL, and Elasticsearch.",
-    features: ["Multi-tenant data isolation", "Product & inventory APIs", "Full-text search", "Role-based access"],
-    metrics: [
-      { icon: <Activity className="w-3.5 h-3.5" />, label: "Low-latency APIs" },
-      { icon: <Globe className="w-3.5 h-3.5" />, label: "Multi-tenant support" },
-    ],
-    tech: ["NestJS", "PostgreSQL", "TypeORM", "AWS", "Elasticsearch"],
-    icon: <Database className="w-6 h-6 text-emerald-400" />,
-    color: "emerald"
-  },
-  {
-    title: "Embark Saudi (Msha3lil)",
-    subtitle: "Location-Based Discovery App Backend",
-    description: "Built backend services for a location-based discovery app. Worked on check-in flows, reward systems, and caching with Redis to keep response times fast.",
-    features: ["Check-in APIs", "Rewards logic", "Redis caching", "Geo-queries"],
-    metrics: [
-      { icon: <Activity className="w-3.5 h-3.5" />, label: "Geo-spatial queries" },
-      { icon: <Server className="w-3.5 h-3.5" />, label: "Redis caching" },
-    ],
-    tech: ["HapiJS", "MongoDB", "Redis", "Microservices"],
-    icon: <Server className="w-6 h-6 text-blue-400" />,
-    color: "blue"
-  },
-  {
-    title: "Pridemobility",
-    subtitle: "Rehabilitation Product Management",
-    description: "Contributed to the backend for a platform managing rehabilitation products. Focused on product catalog APIs, documentation, and keeping the data model clean.",
-    features: ["Product catalog APIs", "Documentation handling", "Structured data model"],
-    metrics: [
-      { icon: <Database className="w-3.5 h-3.5" />, label: "Relational schemas" },
-      { icon: <Globe className="w-3.5 h-3.5" />, label: "B2B integrations" },
-    ],
-    tech: ["Express.js", "MySQL", "Sequelize", "TypeScript"],
-    icon: <Layout className="w-6 h-6 text-purple-400" />,
-    color: "purple"
-  },
-  {
-    title: "Focus Pilot AI",
-    subtitle: "AI-Powered Habit Tracking",
-    description: "Worked on the backend for a habit and goal tracking app. Used Amazon SQS to handle reminders and notifications asynchronously, keeping the main API responsive.",
-    features: ["Goal & habit APIs", "Async reminders via SQS", "Background processing"],
-    metrics: [
-      { icon: <Activity className="w-3.5 h-3.5" />, label: "Async processing" },
-      { icon: <Server className="w-3.5 h-3.5" />, label: "Event-driven flow" },
-    ],
-    tech: ["NestJS", "MongoDB", "Redis", "Amazon SQS"],
-    icon: <Server className="w-6 h-6 text-orange-400" />,
-    color: "orange"
-  }
-];
+import { PORTFOLIO_CONTENT } from "@/content/portfolio";
 
 export function Projects() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const projects = PORTFOLIO_CONTENT.projects;
 
   const toggleExpand = (idx: number) => {
     setExpandedIndex(expandedIndex === idx ? null : idx);
+  };
+
+  // Map project icons based on index
+  const getProjectIcon = (index: number) => {
+    switch (index) {
+      case 0:
+        return <Database className="w-6 h-6 text-emerald-400" />;
+      case 1:
+        return <Globe className="w-6 h-6 text-blue-400" />;
+      case 2:
+        return <Activity className="w-6 h-6 text-purple-400" />;
+      case 3:
+        return <Cpu className="w-6 h-6 text-orange-400" />;
+      default:
+        return <Database className="w-6 h-6 text-zinc-400" />;
+    }
+  };
+
+  // Get border and text hover colors
+  const getAccentColor = (index: number) => {
+    switch (index) {
+      case 0: return "hover:border-emerald-500/30 text-emerald-400";
+      case 1: return "hover:border-blue-500/30 text-blue-400";
+      case 2: return "hover:border-purple-500/30 text-purple-400";
+      case 3: return "hover:border-orange-500/30 text-orange-400";
+      default: return "hover:border-primary/30 text-primary";
+    }
   };
 
   return (
@@ -72,12 +46,13 @@ export function Projects() {
       <div className="container mx-auto px-4 md:px-8">
         <SectionHeading
           title="Projects"
-          subtitle="A few of the products I've worked on professionally."
+          subtitle="Anonymized backend platforms and services I have contributed to."
         />
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {projects.map((project, idx) => {
             const isExpanded = expandedIndex === idx;
+            const accentClass = getAccentColor(idx);
 
             return (
               <motion.div
@@ -85,101 +60,115 @@ export function Projects() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="glass p-6 md:p-8 rounded-2xl border border-white/5 flex flex-col h-full group hover:border-white/10 transition-colors"
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                className={`glass p-6 md:p-8 rounded-2xl border border-white/5 flex flex-col group transition-all duration-300 ${accentClass}`}
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex gap-4">
-                    <div className="p-3 bg-white/5 rounded-xl border border-white/5 h-max">
-                      {project.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
-                      <p className="text-sm font-mono text-muted-foreground mt-1">{project.subtitle}</p>
-                    </div>
+                {/* Header */}
+                <div className="flex gap-4 items-start mb-6">
+                  <div className="p-3 bg-white/5 rounded-xl border border-white/5 h-max shrink-0">
+                    {getProjectIcon(idx)}
                   </div>
-                  <a href="#" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground tracking-tight group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm font-mono text-muted-foreground mt-1">{project.subtitle}</p>
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3 mb-6">
-                  {project.metrics.map((metric, i) => (
-                    <div key={i} className="flex items-center gap-1.5 text-xs font-medium text-foreground bg-white/5 px-2.5 py-1 rounded-full border border-white/5">
-                      <span className={`text-${project.color}-400`}>{metric.icon}</span>
-                      {metric.label}
-                    </div>
-                  ))}
-                </div>
-
+                {/* Description */}
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                  {project.tech.map(t => (
-                    <span key={t} className="text-[11px] font-mono text-muted-foreground bg-black/50 border border-white/10 px-2.5 py-1 rounded-md">
-                      {t}
+                {/* Highlights Checklist */}
+                <div className="mb-6">
+                  <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Key Contributions</p>
+                  <ul className="text-sm text-foreground/80 grid sm:grid-cols-2 gap-2.5">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight} className="flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                        <span className="leading-snug">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Tech Stack Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((techItem) => (
+                    <span
+                      key={techItem}
+                      className="text-[11px] font-mono text-muted-foreground bg-black/40 border border-white/10 px-2.5 py-1 rounded-md"
+                    >
+                      {techItem}
                     </span>
                   ))}
                 </div>
 
-                <div className="border-t border-white/5 pt-4">
+                {/* Expandable Engineering Challenge */}
+                <div className="border-t border-white/5 pt-4 mt-auto">
                   <button
                     onClick={() => toggleExpand(idx)}
-                    className="flex items-center justify-between w-full text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    className="flex items-center justify-between w-full text-sm font-medium text-foreground hover:text-primary transition-colors focus:outline-none"
+                    aria-expanded={isExpanded}
                   >
-                    View Details
-                    <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                    <span className="font-mono text-xs uppercase tracking-wider">Engineering Challenge</span>
+                    <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
                       <ChevronDown className="w-4 h-4" />
                     </motion.div>
                   </button>
 
-                  <AnimatePresence>
+                  <AnimatePresence initial={false}>
                     {isExpanded && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-6 pb-2">
-                          <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Service Flow</p>
-
-                          <div className="bg-black/60 rounded-xl p-4 border border-white/5 mb-6 flex items-center justify-between relative">
-                            <div className="absolute top-1/2 left-8 right-8 h-px bg-white/10 -z-0" />
-
-                            <div className="flex flex-col items-center gap-2 z-10">
-                              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                                <Globe className="w-4 h-4 text-muted-foreground" />
-                              </div>
-                              <span className="text-[10px] text-muted-foreground font-mono">Client</span>
-                            </div>
-
-                            <div className="flex flex-col items-center gap-2 z-10">
-                              <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                                <Server className="w-4 h-4 text-primary" />
-                              </div>
-                              <span className="text-[10px] text-primary font-mono">{project.tech[0]}</span>
-                            </div>
-
-                            <div className="flex flex-col items-center gap-2 z-10">
-                              <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                                <Database className="w-4 h-4 text-blue-400" />
-                              </div>
-                              <span className="text-[10px] text-blue-400 font-mono">{project.tech[1]}</span>
+                        <div className="pt-6 pb-2 space-y-5 font-mono text-xs leading-relaxed border-t border-white/5 mt-4">
+                          {/* Problem block */}
+                          <div className="flex gap-3 bg-red-950/20 border border-red-500/15 p-4 rounded-xl">
+                            <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                            <div>
+                              <p className="text-red-400 font-semibold uppercase tracking-wider mb-1">Incident / Problem</p>
+                              <p className="text-foreground/80 leading-normal">{project.challenge.problem}</p>
                             </div>
                           </div>
 
-                          <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Highlights</p>
-                          <ul className="text-sm text-foreground/80 grid grid-cols-2 gap-3">
-                            {project.features.map(f => (
-                              <li key={f} className="flex items-start gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mt-1.5 shrink-0" />
-                                <span className="leading-snug">{f}</span>
-                              </li>
-                            ))}
-                          </ul>
+                          {/* Actions taken */}
+                          <div className="flex gap-3 bg-emerald-950/25 border border-emerald-500/15 p-4 rounded-xl">
+                            <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                            <div className="flex-1">
+                              <p className="text-primary font-semibold uppercase tracking-wider mb-2">Resolution Steps</p>
+                              <ul className="space-y-1.5 text-foreground/80">
+                                {project.challenge.actions.map((act, i) => (
+                                  <li key={i} className="flex items-start gap-2">
+                                    <span className="text-primary shrink-0">+</span>
+                                    <span>{act}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Results block */}
+                          <div className="flex gap-3 bg-blue-950/20 border border-blue-500/15 p-4 rounded-xl">
+                            <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                            <div>
+                              <p className="text-blue-400 font-semibold uppercase tracking-wider mb-2">Result</p>
+                              <ul className="space-y-1.5 text-foreground/80">
+                                {project.challenge.result.map((res, i) => (
+                                  <li key={i} className="flex items-start gap-2">
+                                    <span className="text-blue-400 shrink-0">✓</span>
+                                    <span>{res}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
                         </div>
                       </motion.div>
                     )}
