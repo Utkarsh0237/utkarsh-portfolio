@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Utkarsh Pandey | Backend Developer",
+  title: "Utkarsh Pandey | Senior Software Engineer",
   description: "Portfolio of Utkarsh Pandey showcasing backend development projects and technical expertise.",
 };
 

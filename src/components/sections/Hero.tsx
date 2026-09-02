@@ -94,7 +94,6 @@ export function Hero() {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-emerald-500/20 blur-2xl opacity-40 -z-10 rounded-full" />
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
-              {content.title} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">
                 {content.titleGradient}
               </span>
