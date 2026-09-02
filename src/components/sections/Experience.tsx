@@ -32,7 +32,7 @@ export function Experience() {
             <div className="glass p-6 md:p-8 rounded-xl border border-border hover:border-primary/30 transition-colors">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-foreground">Backend Software Engineer</h3>
+                  <h3 className="text-2xl font-bold text-foreground">Senior Software Engineer</h3>
                   <div className="flex items-center gap-2 mt-2 text-primary font-medium">
                     <Briefcase className="w-4 h-4" />
                     <span>Appinventiv</span>

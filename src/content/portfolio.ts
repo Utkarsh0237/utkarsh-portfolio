@@ -41,17 +41,17 @@ export interface ContactDetail {
 
 export const PORTFOLIO_CONTENT = {
   metadata: {
-    title: "Utkarsh Pandey | Backend Software Engineer",
+    title: "Utkarsh Pandey | Senior Software Engineer",
     description: "Backend engineer focused on scalable APIs, distributed systems, and cloud infrastructure.",
   },
   hero: {
     tagline: "Open to Backend Engineer opportunities",
     title: "Backend",
-    titleGradient: "Software Engineer",
+    titleGradient: "Senior Software Engineer",
     name: "Utkarsh Pandey",
     subtitle: "Backend engineer focused on scalable APIs, distributed systems, and cloud infrastructure.",
     intro: "I build reliable APIs and backend systems using Node.js, NestJS, and TypeScript. My focus is on optimizing databases, designing AWS cloud infrastructure, and writing clean, maintainable code with a reliability mindset.",
-    resumeUrl: "https://drive.google.com/file/d/1mYDkiaOrArDIAMZV0X-43X-yaH88hbRt/view?usp=sharing",
+    resumeUrl: "https://drive.google.com/file/d/1vO7fq19aFk_syb7HqN04AGbArq73xvgo/view?usp=drive_link",
     linkedinUrl: "https://www.linkedin.com/in/utkarsh-pandey-51816a1ba",
     metrics: [
       { label: "API improvement", value: "~40%" },
@@ -62,7 +62,7 @@ export const PORTFOLIO_CONTENT = {
   about: {
     title: "About Me",
     subtitle: "I build APIs, optimize database operations, and design cloud-based backend services.",
-    bio: "I am a backend software engineer with over 3 years of professional experience building APIs and scalable systems. I specialize in backend development with Node.js and NestJS, system design patterns, and databases like PostgreSQL, MongoDB, and Redis. With hands-on experience designing cloud infrastructure on AWS, I focus on building reliable systems, optimizing query performance, and handling background workflows efficiently.",
+    bio: "I am a backend-focused Senior Software Engineer with 3.3+ years of professional experience building APIs and scalable systems. I specialize in backend development with Node.js and NestJS, system design patterns, and databases like PostgreSQL, MongoDB, and Redis. With hands-on experience designing cloud infrastructure on AWS, I focus on building reliable systems, optimizing query performance, and handling background workflows efficiently.",
   },
   technicalHighlights: {
     title: "Technical Highlights",
